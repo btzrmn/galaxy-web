@@ -3,7 +3,10 @@
   <div class="page-hero">
     <div class="container">
       <span class="section-label">Дууны сан</span>
-      <h1 class="page-title" *ngIf="song">{{ song.name }}</h1>
+      <h1 class="page-title" *ngIf="song">
+        {{ song.name }}
+        <span class="title-code-badge">{{ song.code }}</span>
+      </h1>
       <h1 class="page-title" *ngIf="!song && !loading">Дуу</h1>
     </div>
   </div>
@@ -23,7 +26,7 @@
     <!-- Song Detail -->
     <div class="detail-layout" *ngIf="song && !loading">
       <!-- Info Card -->
-      <div class="info-card glass-card reveal">
+      <div class="info-card glass-card fade-in">
         <!-- Code highlight -->
         <div class="code-row">
           <div class="code-block">
@@ -70,7 +73,7 @@
       </div>
 
       <!-- Lyrics Card -->
-      <div class="lyrics-card glass-card reveal" *ngIf="song.lyrics?.lyrics">
+      <div class="lyrics-card glass-card fade-in" *ngIf="song.lyrics?.lyrics">
         <div class="lyrics-header">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M9 18V5l12-2v13" />
@@ -83,7 +86,7 @@
       </div>
 
       <!-- No Lyrics -->
-      <div class="no-lyrics glass-card reveal" *ngIf="!song.lyrics?.lyrics">
+      <div class="no-lyrics glass-card fade-in" *ngIf="!song.lyrics?.lyrics">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M9 18V5l12-2v13" />
           <circle cx="6" cy="18" r="3" />
@@ -93,7 +96,7 @@
       </div>
 
       <!-- Back Button -->
-      <div class="detail-back reveal">
+      <div class="detail-back">
         <button class="btn btn-outline" (click)="goBack()">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M19 12H5M12 19l-7-7 7-7" />
