@@ -1,7 +1,7 @@
 <div class="page-wrapper">
   <!-- Hero -->
   <div class="page-hero">
-    <div class="container">
+    <div class="container" style="margin-right: 200px;">
       <span class="section-label">Дууны сан</span>
       <h1 class="page-title" *ngIf="song">
         {{ song.name }}
@@ -30,13 +30,13 @@
         <!-- Code highlight -->
         <div class="code-row">
           <div class="code-block">
-            <span class="code-label">SD код</span>
+            <span class="code-label">Дууны код</span>
             <span class="code-value">{{ song.code }}</span>
           </div>
-          <div class="code-block" *ngIf="song.codeHd">
+          <!-- <div class="code-block" *ngIf="song.codeHd">
             <span class="code-label">HD код</span>
             <span class="code-value code-hd">{{ song.codeHd }}</span>
-          </div>
+          </div> -->
           <!-- YouTube Link -->
           <div class="youtube-row" *ngIf="song.youtubeLink">
             <a [href]="song.youtubeLink" target="_blank" rel="noopener noreferrer" class="youtube-btn">

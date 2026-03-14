@@ -26,9 +26,46 @@ export class SongComponent implements OnInit, OnDestroy {
   private searchSubject = new Subject<void>();
   private destroy$ = new Subject<void>();
 
-  constructor(private songService: SongService, private router: Router) {}
+  constructor(
+    private songService: SongService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
+    this.genres = [
+      {
+        id: 2001,
+        name: 'Рок поп',
+      },
+      {
+        id: 2002,
+        name: 'Хип хоп',
+      },
+      {
+        id: 2003,
+        name: 'Нийтийн, Ардын дуу',
+      },
+      {
+        id: 2004,
+        name: 'Орос дуу',
+      },
+      {
+        id: 2005,
+        name: 'Англи дуу',
+      },
+      {
+        id: 2006,
+        name: 'Казак дуу',
+      },
+      {
+        id: 2007,
+        name: 'Диско',
+      },
+      {
+        id: 2008,
+        name: 'Хүүхдийн',
+      },
+    ];
     this.loadLatestSongs();
     this.setupSearch();
   }
@@ -43,7 +80,6 @@ export class SongComponent implements OnInit, OnDestroy {
     this.songService.getSongs({ limit: 100 }).subscribe({
       next: (res) => {
         this.songs = res?.data || [];
-        this.extractGenres(this.songs);
         this.loading = false;
       },
       error: () => {
@@ -51,16 +87,6 @@ export class SongComponent implements OnInit, OnDestroy {
         this.loading = false;
       },
     });
-  }
-
-  extractGenres(songs: any[]): void {
-    const map = new Map<number, string>();
-    songs.forEach((s) => {
-      if (s.genre_id && s.genre_name) {
-        map.set(s.genre_id, s.genre_name);
-      }
-    });
-    this.genres = Array.from(map.entries()).map(([id, name]) => ({ id, name }));
   }
 
   setupSearch(): void {
@@ -75,7 +101,7 @@ export class SongComponent implements OnInit, OnDestroy {
           if (this.selectedGenreId != null) params.genreId = this.selectedGenreId;
           return this.songService.getSongs(params);
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe({
         next: (res) => {
