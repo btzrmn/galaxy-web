@@ -1,0 +1,69 @@
+<!-- Pre-header Starts -->
+<div class="pre-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-sm-8 col-7">
+        <ul class="info">
+          <li><a href="#"><i class="fa fa-envelope"></i>info@nextgalaxy.com</a></li>
+          <li><a href="#"><i class="fa fa-phone"></i>8020 2080</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-sm-4 col-5">
+        <ul class="social-media">
+          <li><a href="https://www.facebook.com/nextgalaxymongolia" target="_blank"><i class="fa fa-facebook"></i></a>
+          </li>
+          <li><a href="https://nextgalaxy.mn:8443" target="_blank"><i class="fa fa-dribbble"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Pre-header End -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <!-- ***** Logo Start ***** -->
+          <a routerLink="/home" class="logo">
+            <img src="assets/images/logo.png" alt="Next Galaxy Logo">
+          </a>
+          <!-- ***** Logo End ***** -->
+          <!-- ***** Menu Start ***** -->
+          <ul class="nav">
+            <li class="scroll-to-section"><a routerLink="home" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact: true}">Нүүр</a></li>
+            <li class="scroll-to-section has-sub">
+              <a [routerLink]="['product', 1]" routerLinkActive="active">Бүтээгдэхүүн</a>
+              <ul class="sub-menu">
+                <li><a [routerLink]="['product', 1]" routerLinkActive="active"
+                    (click)="onProductClick(1)">Тоглуулагч</a></li>
+                <li><a [routerLink]="['product', 2]" routerLinkActive="active" (click)="onProductClick(2)">Өсгөгч</a>
+                </li>
+                <li><a [routerLink]="['product', 3]" routerLinkActive="active" (click)="onProductClick(3)">Яригч</a>
+                </li>
+                <li><a [routerLink]="['product', 4]" routerLinkActive="active" (click)="onProductClick(4)">Микрофон</a>
+                </li>
+                <li><a [routerLink]="['product', 5]" routerLinkActive="active" (click)="onProductClick(5)">Удирдлага</a>
+                </li>
+                <li><a [routerLink]="['product', 6]" routerLinkActive="active" (click)="onProductClick(6)">Дагалдах
+                    хэрэгсэл</a></li>
+              </ul>
+            </li>
+            <li class="scroll-to-section"><a routerLink="news" routerLinkActive="active">Мэдээлэл</a></li>
+            <li class="scroll-to-section"><a routerLink="song" routerLinkActive="active">Дууны сан</a></li>
+            <li class="scroll-to-section"><a routerLink="about-us" routerLinkActive="active">Бидний тухай</a></li>
+            <li class="scroll-to-section">
+              <div class="border-first-button"><a (click)="showDialog()">Холбогдох</a></div>
+            </li>
+          </ul>
+          <a class='menu-trigger' [class.active]="isMenuOpen" (click)="toggleMenu()">
+            <span>Menu</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>

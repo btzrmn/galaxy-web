@@ -1,0 +1,70 @@
+<div id="news" class="news">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 offset-lg-4  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.3s">
+        <div class="section-heading">
+          <!-- <h6>Recent News</h6> -->
+          <h4>Мэдээ <em>Мэдээлэл</em></h4>
+          <div class="line-dec"></div>
+        </div>
+      </div>
+      <div class="col-lg-6 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+        <div class="news-post">
+          <div class="thumb">
+            <div *ngIf="!parentNews.fileImage">
+              <div class="video-container">
+                <video controls style="width: 100%; height: 100%;">
+                  <source [src]="parentNews.filePath" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+            <div *ngIf="parentNews.fileImage">
+              <a><img [src]="parentNews.filePath" alt=""></a>
+            </div>
+          </div>
+          <div class="down-content">
+            <span class="category">Мэдээ</span>
+            <span class="date">{{parentNews.createdDate | date: 'yyyy-MM-dd HH:mm'}}</span>
+            <a [routerLink]="'/news/' + parentNews.id">
+              <h4>{{parentNews.name}}</h4>
+            </a>
+            <!-- <p>{{parentNews.content}}</p> -->
+            <span class="author"><img src="assets/images/only-logo.png" alt="">Next Galaxy</span>
+            <div class="border-first-button"><a [routerLink]="'/news/' + parentNews.id">Дэлгэрэнгүй</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+        <div class="news-posts">
+          <div class="row">
+            <div class="col-lg-12" *ngFor="let item of news">
+              <div class="post-item">
+                <div class="thumb">
+                  <div *ngIf="!item.fileImage">
+                    <div class="video-container">
+                      <video controls style="width: 240px; height: 180px;">
+                        <source [src]="item.filePath" type="video/mp4" />
+                      </video>
+                    </div>
+                  </div>
+                  <div *ngIf="item.fileImage">
+                    <a><img [src]="item.filePath" alt=""></a>
+                  </div>
+                </div>
+                <div class="right-content">
+                  <a [routerLink]="'/news/' + item.id">
+                    <h4>{{item.name}}</h4>
+                  </a>
+                  <p [innerHTML]="item.content | slice:0:200" style="margin-bottom: 20px;"></p>
+                  <span class="category">Мэдээ</span>
+                  <span class="date">{{item.createdDate | date: 'yyyy-MM-dd HH:mm'}}</span>
+                  <!-- <div class="border-first-button" style="text-align: right;"><a href="#">Дэлгэрэнгүй</a></div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

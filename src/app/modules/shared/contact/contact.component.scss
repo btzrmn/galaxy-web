@@ -1,0 +1,30 @@
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.image-size {
+  width: 210px !important;
+  height: 240px !important;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: #dc3545;
+}
+
+@media (max-width: 767px) {
+  .post-item .right-content p {
+    display: block;
+    font-size: 14px;
+  }
+  .image-size {
+    width: 210px !important;
+    height: 180px !important;
+  }
+}

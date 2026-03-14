@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  galaxy-web:
+    image: nginx
+    container_name: galaxy-web
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./dist/galaxy-web:/usr/share/nginx/html
+      - ./cert/certificate.crt:/etc/nginx/tls.crt
+      - ./cert/private.key:/etc/nginx/tls.key
+      - ./cert/tls_password.txt:/etc/nginx/tls_password.txt
+    ports:
+      - "443:443"
+    environment:
+      - NGINX_PORT=443
