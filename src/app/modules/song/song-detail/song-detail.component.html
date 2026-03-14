@@ -1,0 +1,114 @@
+<div class="page-wrapper">
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">Дууны сан</span>
+      <h1 class="page-title" *ngIf="song">{{ song.name }}</h1>
+      <h1 class="page-title" *ngIf="!song && !loading">Дуу</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Loading -->
+    <div class="detail-loading" *ngIf="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Error -->
+    <div class="error-state" *ngIf="error && !loading">
+      <p>Дуунй мэдээлэл ачааллахад алдаа гарлаа.</p>
+      <button class="btn btn-outline" (click)="goBack()">Буцах</button>
+    </div>
+
+    <!-- Song Detail -->
+    <div class="detail-layout" *ngIf="song && !loading">
+      <!-- Info Card -->
+      <div class="info-card glass-card reveal">
+        <!-- Code highlight -->
+        <div class="code-row">
+          <div class="code-block">
+            <span class="code-label">SD код</span>
+            <span class="code-value">{{ song.code }}</span>
+          </div>
+          <div class="code-block" *ngIf="song.codeHd">
+            <span class="code-label">HD код</span>
+            <span class="code-value code-hd">{{ song.codeHd }}</span>
+          </div>
+        </div>
+
+        <!-- Details grid -->
+        <div class="info-grid">
+          <div class="info-item" *ngIf="song.artistName">
+            <span class="info-label">Дуучин / Хамтлаг</span>
+            <span class="info-value">{{ song.artistName }}</span>
+          </div>
+          <div class="info-item" *ngIf="song.artistNameEn">
+            <span class="info-label">Англи нэр</span>
+            <span class="info-value">{{ song.artistNameEn }}</span>
+          </div>
+          <div class="info-item" *ngIf="song.genreName">
+            <span class="info-label">Жанр</span>
+            <span class="info-value">
+              <span class="genre-tag">{{ song.genreName }}</span>
+            </span>
+          </div>
+          <div class="info-item" *ngIf="song.nameEn">
+            <span class="info-label">Дууны англи нэр</span>
+            <span class="info-value">{{ song.nameEn }}</span>
+          </div>
+          <div class="info-item" *ngIf="song.lyricist">
+            <span class="info-label">Үгийн зохиолч</span>
+            <span class="info-value">{{ song.lyricist }}</span>
+          </div>
+          <div class="info-item" *ngIf="song.composer">
+            <span class="info-label">Хөгжим зохиолч</span>
+            <span class="info-value">{{ song.composer }}</span>
+          </div>
+        </div>
+
+        <!-- YouTube Link -->
+        <div class="youtube-row" *ngIf="song.youtubeLink">
+          <a [href]="song.youtubeLink" target="_blank" rel="noopener noreferrer" class="youtube-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            YouTube дээр үзэх
+          </a>
+        </div>
+      </div>
+
+      <!-- Lyrics Card -->
+      <div class="lyrics-card glass-card reveal" *ngIf="song.lyrics?.lyrics">
+        <div class="lyrics-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18V5l12-2v13"/>
+            <circle cx="6" cy="18" r="3"/>
+            <circle cx="18" cy="16" r="3"/>
+          </svg>
+          <h3>Дууны үг</h3>
+        </div>
+        <div class="lyrics-body">{{ song.lyrics.lyrics }}</div>
+      </div>
+
+      <!-- No Lyrics -->
+      <div class="no-lyrics glass-card reveal" *ngIf="!song.lyrics?.lyrics">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 18V5l12-2v13"/>
+          <circle cx="6" cy="18" r="3"/>
+          <circle cx="18" cy="16" r="3"/>
+        </svg>
+        <p>Дууны үг бүртгэгдээгүй байна</p>
+      </div>
+
+      <!-- Back Button -->
+      <div class="detail-back reveal">
+        <button class="btn btn-outline" (click)="goBack()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Дууны сан руу буцах
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
