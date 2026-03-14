@@ -1,0 +1,104 @@
+.about-section {
+  background: linear-gradient(180deg, #080B1A 0%, #0a0d1f 50%, #080B1A 100%);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.about-img-wrapper {
+  position: relative;
+}
+
+.about-img-glow {
+  position: absolute;
+  inset: -30px;
+  background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.2) 0%, transparent 65%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.about-img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+}
+
+.about-content {
+  .about-desc {
+    color: #94A3B8;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+
+    p { color: #94A3B8; margin-bottom: 12px; }
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stat-card {
+  padding: 24px 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  text-align: center;
+  transition: all 0.3s;
+
+  &:hover {
+    border-color: rgba(124, 58, 237, 0.35);
+    background: rgba(124, 58, 237, 0.08);
+    transform: translateY(-4px);
+  }
+
+  .stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #A78BFA, #06B6D4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: #64748B;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 16px 8px;
+
+    .stat-number { font-size: 1.6rem; }
+  }
+}

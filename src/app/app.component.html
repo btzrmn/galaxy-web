@@ -1,14 +1,10 @@
-<div class="js-preloader" *ngIf="loading">
-  <div class="preloader-inner">
-    <span class="dot"></span>
-    <div class="dots">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
+<!-- Loading overlay -->
+<div class="loading-overlay" *ngIf="loading">
+  <div class="spinner"></div>
 </div>
-<!-- ***** Preloader End ***** -->
+
 <app-header></app-header>
-<router-outlet></router-outlet>
+<main>
+  <router-outlet></router-outlet>
+</main>
 <app-footer></app-footer>

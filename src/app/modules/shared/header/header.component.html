@@ -1,69 +1,103 @@
-<!-- Pre-header Starts -->
-<div class="pre-header">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-sm-8 col-7">
-        <ul class="info">
-          <li><a href="#"><i class="fa fa-envelope"></i>info@nextgalaxy.com</a></li>
-          <li><a href="#"><i class="fa fa-phone"></i>8020 2080</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-4 col-sm-4 col-5">
-        <ul class="social-media">
-          <li><a href="https://www.facebook.com/nextgalaxymongolia" target="_blank"><i class="fa fa-facebook"></i></a>
-          </li>
-          <li><a href="https://nextgalaxy.mn:8443" target="_blank"><i class="fa fa-dribbble"></i></a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- Pre-header End -->
+<nav class="navbar" [class.scrolled]="isScrolled" [class.menu-open]="isMenuOpen">
+  <div class="navbar-inner">
+    <!-- Logo -->
+    <a routerLink="/home" class="navbar-logo" (click)="closeMenu()">
+      <img src="assets/images/logo.png" alt="Next Galaxy" class="logo-img">
+    </a>
 
-<!-- ***** Header Area Start ***** -->
-<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <nav class="main-nav">
-          <!-- ***** Logo Start ***** -->
-          <a routerLink="/home" class="logo">
-            <img src="assets/images/logo.png" alt="Next Galaxy Logo">
+    <!-- Desktop Menu -->
+    <ul class="navbar-menu">
+      <li>
+        <a routerLink="home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Нүүр</a>
+      </li>
+      <li class="has-dropdown">
+        <a [routerLink]="['product', 1]" routerLinkActive="active">
+          Бүтээгдэхүүн
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <div class="dropdown-menu">
+          <a [routerLink]="['product', 1]" (click)="onProductClick(1)">
+            <img src="assets/images/icon1.png" alt=""> Тоглуулагч
           </a>
-          <!-- ***** Logo End ***** -->
-          <!-- ***** Menu Start ***** -->
-          <ul class="nav">
-            <li class="scroll-to-section"><a routerLink="home" routerLinkActive="active"
-                [routerLinkActiveOptions]="{exact: true}">Нүүр</a></li>
-            <li class="scroll-to-section has-sub">
-              <a [routerLink]="['product', 1]" routerLinkActive="active">Бүтээгдэхүүн</a>
-              <ul class="sub-menu">
-                <li><a [routerLink]="['product', 1]" routerLinkActive="active"
-                    (click)="onProductClick(1)">Тоглуулагч</a></li>
-                <li><a [routerLink]="['product', 2]" routerLinkActive="active" (click)="onProductClick(2)">Өсгөгч</a>
-                </li>
-                <li><a [routerLink]="['product', 3]" routerLinkActive="active" (click)="onProductClick(3)">Яригч</a>
-                </li>
-                <li><a [routerLink]="['product', 4]" routerLinkActive="active" (click)="onProductClick(4)">Микрофон</a>
-                </li>
-                <li><a [routerLink]="['product', 5]" routerLinkActive="active" (click)="onProductClick(5)">Удирдлага</a>
-                </li>
-                <li><a [routerLink]="['product', 6]" routerLinkActive="active" (click)="onProductClick(6)">Дагалдах
-                    хэрэгсэл</a></li>
-              </ul>
-            </li>
-            <li class="scroll-to-section"><a routerLink="news" routerLinkActive="active">Мэдээлэл</a></li>
-            <li class="scroll-to-section"><a routerLink="song" routerLinkActive="active">Дууны сан</a></li>
-            <li class="scroll-to-section"><a routerLink="about-us" routerLinkActive="active">Бидний тухай</a></li>
-            <li class="scroll-to-section">
-              <div class="border-first-button"><a (click)="showDialog()">Холбогдох</a></div>
-            </li>
-          </ul>
-          <a class='menu-trigger' [class.active]="isMenuOpen" (click)="toggleMenu()">
-            <span>Menu</span>
+          <a [routerLink]="['product', 2]" (click)="onProductClick(2)">
+            <img src="assets/images/icon7.png" alt=""> Өсгөгч
           </a>
-        </nav>
-      </div>
+          <a [routerLink]="['product', 3]" (click)="onProductClick(3)">
+            <img src="assets/images/icon3.png" alt=""> Яригч
+          </a>
+          <a [routerLink]="['product', 4]" (click)="onProductClick(4)">
+            <img src="assets/images/icon5.png" alt=""> Микрофон
+          </a>
+          <a [routerLink]="['product', 5]" (click)="onProductClick(5)">
+            <img src="assets/images/icon4.png" alt=""> Удирдлага
+          </a>
+          <a [routerLink]="['product', 6]" (click)="onProductClick(6)">
+            <img src="assets/images/icon1.png" alt=""> Дагалдах хэрэгсэл
+          </a>
+        </div>
+      </li>
+      <li>
+        <a routerLink="news" routerLinkActive="active">Мэдээлэл</a>
+      </li>
+      <li>
+        <a routerLink="song" routerLinkActive="active">Дууны сан</a>
+      </li>
+      <li>
+        <a routerLink="karaoke-places" routerLinkActive="active">Караоке газрууд</a>
+      </li>
+      <li>
+        <a routerLink="about-us" routerLinkActive="active">Бидний тухай</a>
+      </li>
+    </ul>
+
+    <!-- Right Actions -->
+    <div class="navbar-actions">
+      <a href="tel:80202080" class="navbar-phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.86 19.79 19.79 0 01.78 1.18 2 2 0 012.78 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.09 6.09l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/>
+        </svg>
+        8020 2080
+      </a>
+      <button class="btn-contact" (click)="showDialog()">Холбогдох</button>
     </div>
+
+    <!-- Mobile Toggle -->
+    <button class="mobile-toggle" (click)="toggleMenu()" [class.open]="isMenuOpen" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
-</header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" [class.open]="isMenuOpen">
+    <ul>
+      <li><a routerLink="home" routerLinkActive="active" (click)="closeMenu()">Нүүр</a></li>
+      <li class="mobile-has-sub">
+        <button class="mobile-sub-toggle" (click)="toggleProductSub()">
+          Бүтээгдэхүүн
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" [class.rotated]="isProductOpen">
+            <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <ul class="mobile-sub" [class.open]="isProductOpen">
+          <li><a [routerLink]="['product', 1]" (click)="onProductClick(1); closeMenu()">Тоглуулагч</a></li>
+          <li><a [routerLink]="['product', 2]" (click)="onProductClick(2); closeMenu()">Өсгөгч</a></li>
+          <li><a [routerLink]="['product', 3]" (click)="onProductClick(3); closeMenu()">Яригч</a></li>
+          <li><a [routerLink]="['product', 4]" (click)="onProductClick(4); closeMenu()">Микрофон</a></li>
+          <li><a [routerLink]="['product', 5]" (click)="onProductClick(5); closeMenu()">Удирдлага</a></li>
+          <li><a [routerLink]="['product', 6]" (click)="onProductClick(6); closeMenu()">Дагалдах хэрэгсэл</a></li>
+        </ul>
+      </li>
+      <li><a routerLink="news" routerLinkActive="active" (click)="closeMenu()">Мэдээлэл</a></li>
+      <li><a routerLink="song" routerLinkActive="active" (click)="closeMenu()">Дууны сан</a></li>
+      <li><a routerLink="karaoke-places" routerLinkActive="active" (click)="closeMenu()">Караоке газрууд</a></li>
+      <li><a routerLink="about-us" routerLinkActive="active" (click)="closeMenu()">Бидний тухай</a></li>
+      <li>
+        <button class="btn-contact mobile-contact" (click)="showDialog(); closeMenu()">Холбогдох</button>
+      </li>
+    </ul>
+  </div>
+</nav>

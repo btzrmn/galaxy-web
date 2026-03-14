@@ -1,68 +1,49 @@
-<div id="services" class="services section">
+<section class="services-section section">
   <div class="container">
-    <div class="row">
-      <!-- Section heading -->
-      <div class="col-lg-12">
-        <div class="section-heading wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
-          <h4>Бүтээгдэхүүн</h4>
-          <div class="line-dec"></div>
-        </div>
+    <!-- Heading -->
+    <div class="services-header reveal">
+      <span class="section-label">Каталог</span>
+      <h2 class="section-title">Бүтээгдэхүүн</h2>
+      <p class="section-desc">Тоглуулагчаас эхлэн дагалдах хэрэгсэл хүртэл бүх зүйлийг нэг дороос авах боломжтой</p>
+    </div>
+
+    <!-- Product Tabs -->
+    <div class="product-tabs reveal">
+      <div
+        *ngFor="let item of contents; let i = index"
+        class="product-tab"
+        [class.active]="activeTypeCode === item.typeCode"
+        (click)="setActive(i, item.typeCode)"
+      >
+        <img [src]="item.icon" [alt]="item.title">
+        <span>{{ item.title }}</span>
       </div>
+    </div>
 
-      <div class="col-lg-12">
-        <div class="naccs">
-          <div class="grid">
-            <div class="row">
-              <!-- Menu Items -->
-              <div class="col-lg-12">
-                <div class="menu">
-                  <ng-container *ngFor="let item of contents; let i = index">
-                    <div [class.first-thumb]="i === 0" [class.last-thumb]="i === contents.length - 1"
-                      [class.active]="activeTypeCode === item.typeCode" (click)="setActive(i, item.typeCode)">
-                      <div class="thumb">
-                        <span class="icon">
-                          <img [src]="item.icon" [alt]="item.title">
-                        </span>
-                        {{item.title}}
-                      </div>
-                    </div>
-                  </ng-container>
-                </div>
-              </div>
-
-              <!-- Content Items -->
-              <div class="col-lg-12">
-                <ul class="nacc">
-                  <li *ngFor="let item of contents; let i = index" [class.active]="activeIndex === i">
-                    <div>
-                      <div class="thumb">
-                        <div class="row">
-                          <div class="col-lg-6 align-self-center">
-                            <div class="left-text">
-                              <h4>{{item.title}}</h4>
-                              <p [innerHTML]="item.info"></p>
-                              <!-- <div class="ticks-list">
-                                <span *ngFor="let feature of item.features">
-                                  <i class="fa fa-check"></i> {{feature}}
-                                </span>
-                              </div> -->
-                            </div>
-                          </div>
-                          <div class="col-lg-6 align-self-center">
-                            <div class="right-image">
-                              <img [src]="item.image" [alt]="item.title">
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+    <!-- Product Content -->
+    <div class="product-content-area">
+      <div
+        *ngFor="let item of contents; let i = index"
+        class="product-panel"
+        [class.active]="activeIndex === i"
+      >
+        <div class="product-panel-inner">
+          <div class="product-info reveal-left">
+            <span class="section-label">{{ item.title }}</span>
+            <h3 class="product-title">{{ item.title }}</h3>
+            <div class="product-desc" [innerHTML]="item.info"></div>
+            <a [routerLink]="['/product', i + 1]" class="btn btn-primary">
+              Дэлгэрэнгүй үзэх
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+          <div class="product-image reveal-right">
+            <img [src]="item.image" [alt]="item.title" *ngIf="item.image">
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>

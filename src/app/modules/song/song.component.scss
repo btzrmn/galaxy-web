@@ -1,0 +1,180 @@
+.page-subtitle {
+  color: #94A3B8;
+  font-size: 1rem;
+  margin-top: 12px;
+}
+
+.song-toolbar {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+
+  svg {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748B;
+    pointer-events: none;
+  }
+
+  .search-input {
+    padding-left: 44px;
+    height: 48px;
+  }
+}
+
+.category-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94A3B8;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+
+  &:hover {
+    color: #F8FAFC;
+    border-color: rgba(124, 58, 237, 0.4);
+  }
+
+  &.active {
+    background: rgba(124, 58, 237, 0.2);
+    border-color: rgba(124, 58, 237, 0.5);
+    color: #A78BFA;
+  }
+}
+
+.song-loading {
+  display: flex;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+/* Table */
+.song-table-wrap {
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 80px;
+}
+
+.song-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead tr {
+    background: rgba(124, 58, 237, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    th {
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #64748B;
+    }
+  }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background 0.2s;
+
+    &:last-child { border-bottom: none; }
+
+    &:hover { background: rgba(124, 58, 237, 0.06); }
+
+    td {
+      padding: 14px 20px;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+.song-num {
+  color: #64748B;
+  width: 50px;
+  font-size: 0.8rem !important;
+}
+
+.song-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  color: #F8FAFC;
+}
+
+.song-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: rgba(124, 58, 237, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #A78BFA;
+  flex-shrink: 0;
+}
+
+.song-artist {
+  color: #94A3B8 !important;
+}
+
+/* Empty & Coming Soon */
+.empty-state,
+.coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px;
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.empty-icon,
+.coming-icon {
+  color: rgba(124, 58, 237, 0.3);
+  margin-bottom: 24px;
+}
+
+.empty-state h3,
+.coming-soon h2 {
+  margin-bottom: 12px;
+  color: #F8FAFC;
+}
+
+.empty-state p,
+.coming-soon p {
+  color: #64748B;
+  max-width: 400px;
+}
+
+.coming-badge {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .song-toolbar { flex-direction: column; }
+  .search-box { min-width: 100%; }
+}

@@ -1,38 +1,31 @@
-<div id="news" class="news">
+<div class="page-wrapper">
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">Бүтээгдэхүүн</span>
+      <h1 class="page-title">
+        <span class="gradient-text">{{ contents[0] ? contents[0].typeName : 'Бүтээгдэхүүн' }}</span>
+      </h1>
+    </div>
+  </div>
+
   <div class="container">
-    <div class="row">
-      <div class="col-lg-4 offset-lg-4  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.3s">
-        <div class="section-heading">
-          <!-- <h6>Мэдээлэл</h6> -->
-          <h4><em>{{contents[0] ? contents[0].typeName : ''}}</em></h4>
-          <div class=" line-dec"></div>
-        </div>
-      </div>
-      <div class="col-lg-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
-        <div class="news-posts">
-          <div class="row">
-            <div class="col-lg-6" style="margin-bottom: 20px;" *ngFor="let item of contents">
-              <div class="post-item">
-                <div class="thumb">
-                  <a [routerLink]="item.id"><img [src]="item.filePath" alt=""
-                      style="height: 180px; border: 1px solid #eee;"></a>
-                </div>
-                <div class="right-content">
-                  <!-- <span class="category">{{item.typeName}}</span> -->
-                  <span class="date">{{item.createdDate | date: 'yyyy-MM-dd HH:mm'}}</span>
-                  <a [routerLink]="item.id">
-                    <h4>{{item.name}}</h4>
-                  </a>
-                  <!-- <div class="news-info-desc" [innerHTML]="item.content"></div> -->
-                  <p [innerHTML]="item.info | slice:0:450"></p>
-                  <!-- <div class="border-first-button" style="text-align: right;"><a [routerLink]="item.id">Дэлгэрэнгүй</a>
-                </div> -->
-                </div>
-              </div>
+    <div class="products-grid">
+      <article class="product-item glass-card reveal" *ngFor="let item of contents">
+        <a [routerLink]="item.id" class="product-item-link">
+          <div class="product-img-wrap">
+            <img [src]="item.filePath" [alt]="item.name" loading="lazy" class="product-img">
+            <div class="product-overlay">
+              <span class="view-btn">Дэлгэрэнгүй</span>
             </div>
           </div>
-        </div>
-      </div>
+          <div class="product-body">
+            <span class="product-category">{{ item.typeName }}</span>
+            <h3 class="product-name">{{ item.name }}</h3>
+            <p class="product-info" [innerHTML]="item.info | slice:0:120"></p>
+          </div>
+        </a>
+      </article>
     </div>
   </div>
 </div>

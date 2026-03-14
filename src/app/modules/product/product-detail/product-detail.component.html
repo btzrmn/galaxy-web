@@ -1,21 +1,30 @@
-<div id="news" class="news-detail">
+<div class="page-wrapper">
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">{{ content.typeName }}</span>
+      <h1 class="page-title">{{ content.name }}</h1>
+    </div>
+  </div>
+
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
-        <div class="news-post">
-          <div class="thumb">
-            <a><img [src]="content.filePath" alt=""></a>
-          </div>
-          <div class="down-content">
-            <span class="category">{{content.typeName}}</span>
-            <span class="date">{{content.createdDate | date: 'yyyy-MM-dd HH:mm'}}</span>
-            <a>
-              <h4>{{content.name}}</h4>
-            </a>
-            <p [innerHTML]="content.info"></p>
-            <span class="author"><img src="assets/images/only-logo.png" alt="">Next Galaxy</span>
-            <!-- <div class="border-first-button"><a routerLink="/news">Бусад мэдээллүүд</a></div> -->
-          </div>
+    <div class="product-detail-wrapper">
+      <!-- Image -->
+      <div class="product-detail-img reveal-left">
+        <img [src]="content.filePath" [alt]="content.name" class="detail-img-full">
+      </div>
+
+      <!-- Info -->
+      <div class="product-detail-info reveal-right glass-card">
+        <div class="product-detail-meta">
+          <span class="badge badge-primary">{{ content.typeName }}</span>
+          <span class="detail-date">{{ content.createdDate | date: 'yyyy-MM-dd' }}</span>
+        </div>
+        <h2 class="product-detail-name">{{ content.name }}</h2>
+        <div class="product-detail-desc" [innerHTML]="content.info"></div>
+
+        <div class="product-detail-author">
+          <img src="assets/images/only-logo.png" alt="Next Galaxy" class="author-logo">
+          <span>Next Galaxy</span>
         </div>
       </div>
     </div>

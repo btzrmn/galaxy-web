@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-home-news',
   templateUrl: './home-news.component.html',
-  styleUrls: [],
+  styleUrls: ['./home-news.component.scss'],
 })
 export class HomeNewsComponent {
   parentNews: any;
