@@ -1,31 +1,42 @@
-<div id="news" class="news-detail">
+<div class="page-wrapper">
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">Мэдээ мэдээлэл</span>
+      <h1 class="page-title detail-title">{{ news.name }}</h1>
+      <div class="detail-meta">
+        <span class="badge badge-primary">Мэдээ</span>
+        <span class="detail-date">{{ news.createdDate | date: 'yyyy-MM-dd HH:mm' }}</span>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12 show-up wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
-        <div class="news-post">
-          <div class="thumb">
-            <div class="video-container">
-              <div *ngIf="!news.fileImage">
-                <video controls style="width: 100%; height: 100%;">
-                  <source [src]="news.filePath" type="video/mp4" />
-                </video>
-              </div>
-              <div *ngIf="news.fileImage">
-                <a><img [src]="news.filePath" alt=""></a>
-              </div>
-            </div>
-          </div>
-          <div class="down-content">
-            <span class="category">Мэдээ</span>
-            <span class="date">{{news.createdDate | date: 'yyyy-MM-dd HH:mm'}}</span>
-            <a>
-              <h4>{{news.name}}</h4>
-            </a>
-            <p [innerHTML]="news.content"></p>
-            <span class="author"><img src="assets/images/only-logo.png" alt="">Next Galaxy</span>
-            <div class="border-first-button"><a routerLink="/news">Бусад мэдээллүүд</a></div>
-          </div>
+    <div class="news-detail-wrapper">
+      <!-- Media -->
+      <div class="detail-media reveal" *ngIf="news.filePath">
+        <img *ngIf="news.fileImage" [src]="news.filePath" [alt]="news.name" class="detail-img">
+        <video *ngIf="!news.fileImage" controls class="detail-video">
+          <source [src]="news.filePath" type="video/mp4">
+        </video>
+      </div>
+
+      <!-- Content -->
+      <div class="detail-content glass-card reveal">
+        <div class="detail-body" [innerHTML]="news.content"></div>
+        <div class="detail-author">
+          <img src="assets/images/only-logo.png" alt="Next Galaxy" class="author-logo">
+          <span>Next Galaxy</span>
         </div>
+      </div>
+
+      <!-- Back -->
+      <div class="detail-back reveal">
+        <a routerLink="/news" class="btn btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Бусад мэдээллүүд
+        </a>
       </div>
     </div>
   </div>

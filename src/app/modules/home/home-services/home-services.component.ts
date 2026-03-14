@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-home-services',
   templateUrl: './home-services.component.html',
-  styleUrls: [],
+  styleUrls: ['./home-services.component.scss'],
 })
 export class HomeServicesComponent {
   activeIndex: number = 0;

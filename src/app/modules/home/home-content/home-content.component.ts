@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-home-content',
   templateUrl: './home-content.component.html',
-  styleUrls: [],
+  styleUrls: ['./home-content.component.scss'],
 })
 export class HomeContentComponent {
   content1: any = {};

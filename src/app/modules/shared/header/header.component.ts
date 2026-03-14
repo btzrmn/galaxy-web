@@ -1,4 +1,4 @@
-import { Component, Injector } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ContactComponent } from '../contact/contact.component';
 import { Router } from '@angular/router';
@@ -6,47 +6,50 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: [],
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
-  isShowContact = false;
+export class HeaderComponent implements OnInit {
   isMenuOpen = false;
+  isProductOpen = false;
+  isScrolled = false;
+
   constructor(private dialogService: DialogService, private router: Router) {}
 
-  showDialog() {
-    const dialogRef = this.dialogService.open(ContactComponent, {
-      // header: 'Холбогдох',
-      width: '80vw',
-      height: '80vh',
-    });
-
-    dialogRef.onClose.subscribe(() => {});
+  ngOnInit(): void {
+    this.isScrolled = window.scrollY > 20;
   }
 
-  onProductClick(id: number) {
-    // Force router navigation with reload
+  @HostListener('window:scroll')
+  onScroll(): void {
+    this.isScrolled = window.scrollY > 20;
+  }
+
+  showDialog(): void {
+    this.dialogService.open(ContactComponent, {
+      width: '85vw',
+      height: '85vh',
+    });
+  }
+
+  onProductClick(id: number): void {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
       this.router.navigate(['/product', id]);
     });
   }
 
-  toggleMenu() {
+  toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
-    const nav = document.querySelector('.header-area .nav') as HTMLElement;
-    if (nav) {
-      if (this.isMenuOpen) {
-        nav.style.display = 'block';
-        setTimeout(() => {
-          nav.style.maxHeight = '500px';
-          nav.style.opacity = '1';
-        }, 10);
-      } else {
-        nav.style.maxHeight = '0';
-        nav.style.opacity = '0';
-        setTimeout(() => {
-          nav.style.display = 'none';
-        }, 200);
-      }
+    if (!this.isMenuOpen) {
+      this.isProductOpen = false;
     }
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen = false;
+    this.isProductOpen = false;
+  }
+
+  toggleProductSub(): void {
+    this.isProductOpen = !this.isProductOpen;
   }
 }

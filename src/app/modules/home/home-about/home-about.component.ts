@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-home-about',
   templateUrl: './home-about.component.html',
-  styleUrls: [],
+  styleUrls: ['./home-about.component.scss'],
 })
 export class HomeAboutComponent {
   countValue: any;

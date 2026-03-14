@@ -1,0 +1,100 @@
+<div class="page-wrapper">
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">Next Galaxy</span>
+      <h1 class="page-title">Каraoke <span class="gradient-text">газрууд</span></h1>
+      <p class="page-subtitle">Next Galaxy-ийн тоног төхөөрөмжийг ашигладаг газрууд</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Loading -->
+    <div class="places-loading reveal" *ngIf="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Places grid -->
+    <div class="places-grid" *ngIf="!loading && places.length > 0">
+      <div class="place-card glass-card reveal" *ngFor="let place of places">
+        <div class="place-img-wrap">
+          <img
+            [src]="place.filePath || place.imageUrl"
+            [alt]="place.name"
+            class="place-img"
+            *ngIf="place.filePath || place.imageUrl"
+          >
+          <div class="place-img-placeholder" *ngIf="!place.filePath && !place.imageUrl">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+        </div>
+        <div class="place-body">
+          <h3 class="place-name">{{ place.name }}</h3>
+          <p class="place-address" *ngIf="place.address">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            {{ place.address }}
+          </p>
+          <p class="place-desc" *ngIf="place.description || place.info" [innerHTML]="(place.description || place.info) | slice:0:150"></p>
+          <div class="place-footer" *ngIf="place.phoneNumber || place.phone">
+            <a [href]="'tel:' + (place.phoneNumber || place.phone)" class="place-phone">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.86 19.79 19.79 0 01.78 1.18 2 2 0 012.78 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.09 6.09l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/>
+              </svg>
+              {{ place.phoneNumber || place.phone }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coming soon -->
+    <div class="coming-soon reveal" *ngIf="!loading && places.length === 0">
+      <div class="coming-visual">
+        <div class="coming-icon-wrap">
+          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+      </div>
+      <span class="badge badge-primary coming-badge">Тун удахгүй</span>
+      <h2>Каraoke газрууд бэлтгэгдэж байна</h2>
+      <p>Next Galaxy тоног төхөөрөмжийг ашигладаг каraoke газруудын мэдээлэл удахгүй нэмэгдэх болно</p>
+
+      <!-- Features teaser -->
+      <div class="features-teaser">
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <span>Байршил</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07"/>
+            </svg>
+          </div>
+          <span>Холбоо барих</span>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <span>Үнэлгээ</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

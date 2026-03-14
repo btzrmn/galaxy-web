@@ -1,81 +1,36 @@
-<div id="about" class="about section">
+<section class="about-section section">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="about-left-image wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
-              <img [src]="content2.filePath" alt="">
-            </div>
+    <div class="about-grid">
+      <!-- Image side -->
+      <div class="about-image reveal-left">
+        <div class="about-img-wrapper">
+          <div class="about-img-glow"></div>
+          <img [src]="content2.filePath" alt="Next Galaxy" class="about-img" *ngIf="content2.filePath">
+        </div>
+      </div>
+
+      <!-- Content side -->
+      <div class="about-content reveal-right">
+        <span class="section-label">Бидний тухай</span>
+        <h2 class="section-title">{{ content2.name }}</h2>
+        <div class="about-desc" [innerHTML]="content2.info"></div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">{{ countValue?.customers || 0 }}</div>
+            <div class="stat-label">Харилцагчид</div>
           </div>
-          <div class="col-lg-6 align-self-center  wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
-            <div class="about-right-content">
-              <div class="section-heading">
-                <!-- <h6>Бидний тухай</h6> -->
-                <h4>{{content2.name}}</h4>
-                <div class="line-dec"></div>
-              </div>
-              <p [innerHTML]="content2.info"></p>
-              <div class="row">
-                <div class="col-lg-4 col-sm-4">
-                  <div class="skill-item first-skill-item wow fadeIn" data-wow-duration="1s" data-wow-delay="0s">
-                    <div class="progress" data-percentage="90">
-                      <span class="progress-left">
-                        <span class="progress-bar"></span>
-                      </span>
-                      <span class="progress-right">
-                        <span class="progress-bar"></span>
-                      </span>
-                      <div class="progress-value">
-                        <div>
-                          {{countValue.customers}}<br>
-                          <span>Харилцагчид</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-sm-4">
-                  <div class="skill-item second-skill-item wow fadeIn" data-wow-duration="1s" data-wow-delay="0s">
-                    <div class="progress" data-percentage="80">
-                      <span class="progress-left">
-                        <span class="progress-bar"></span>
-                      </span>
-                      <span class="progress-right">
-                        <span class="progress-bar"></span>
-                      </span>
-                      <div class="progress-value">
-                        <div>
-                          {{countValue.months}}<br>
-                          <span>Дууны бүлэг</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-sm-4">
-                  <div class="skill-item third-skill-item wow fadeIn" data-wow-duration="1s" data-wow-delay="0s">
-                    <div class="progress" data-percentage="80">
-                      <span class="progress-left">
-                        <span class="progress-bar"></span>
-                      </span>
-                      <span class="progress-right">
-                        <span class="progress-bar"></span>
-                      </span>
-                      <div class="progress-value">
-                        <div>
-                          {{countValue.songs}}<br>
-                          <span>Дуу</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="stat-card">
+            <div class="stat-number">{{ countValue?.months || 0 }}</div>
+            <div class="stat-label">Дууны бүлэг</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">{{ countValue?.songs || 0 }}</div>
+            <div class="stat-label">Дуу</div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>

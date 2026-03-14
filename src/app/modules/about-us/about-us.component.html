@@ -1,15 +1,14 @@
-<div id="aboutus" class="aboutus section">
+<div class="page-wrapper">
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">Next Galaxy</span>
+      <h1 class="page-title">Бидний <span class="gradient-text">тухай</span></h1>
+    </div>
+  </div>
+
   <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="section-heading wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
-          <h4>Бидний тухай</h4>
-          <div class="line-dec"></div>
-        </div>
-      </div>
-      <div class="col-lg-12">
-        <p [innerHTML]="data" style="color: #000 !important"></p>
-      </div>
+    <div class="about-page-content glass-card reveal">
+      <div class="about-page-body" [innerHTML]="data"></div>
     </div>
   </div>
 </div>

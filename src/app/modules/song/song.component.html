@@ -1,0 +1,103 @@
+<div class="page-wrapper">
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <span class="section-label">Next Galaxy</span>
+      <h1 class="page-title">Дууны <span class="gradient-text">сан</span></h1>
+      <p class="page-subtitle">Каraoke-д зориулсан манай бүрэн дууны сан</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Search & Filter -->
+    <div class="song-toolbar reveal">
+      <div class="search-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input
+          type="text"
+          class="form-control search-input"
+          placeholder="Дуу, дуучин хайх..."
+          (input)="onSearch($event)"
+        >
+      </div>
+
+      <div class="category-filters" *ngIf="categories.length > 1">
+        <button
+          *ngFor="let cat of categories"
+          class="filter-btn"
+          [class.active]="activeCategory === cat"
+          (click)="setCategory(cat)"
+        >{{ cat }}</button>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="song-loading reveal" *ngIf="loading">
+      <div class="spinner"></div>
+    </div>
+
+    <!-- Song table -->
+    <div class="song-table-wrap reveal" *ngIf="!loading && filtered.length > 0">
+      <table class="song-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Дууны нэр</th>
+            <th>Дуучин / Хамтлаг</th>
+            <th>Ангилал</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let song of filtered; let i = index">
+            <td class="song-num">{{ i + 1 }}</td>
+            <td class="song-name">
+              <div class="song-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M9 18V5l12-2v13"/>
+                  <circle cx="6" cy="18" r="3"/>
+                  <circle cx="18" cy="16" r="3"/>
+                </svg>
+              </div>
+              {{ song.name }}
+            </td>
+            <td class="song-artist">{{ song.artist || '—' }}</td>
+            <td>
+              <span class="badge badge-secondary" *ngIf="song.category || song.typeName">
+                {{ song.category || song.typeName }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state reveal" *ngIf="!loading && filtered.length === 0">
+      <div class="empty-icon">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M9 18V5l12-2v13"/>
+          <circle cx="6" cy="18" r="3"/>
+          <circle cx="18" cy="16" r="3"/>
+        </svg>
+      </div>
+      <h3>Дуу олдсонгүй</h3>
+      <p>Хайлтын нөхцлөө өөрчилж дахин оролдоно уу</p>
+    </div>
+
+    <!-- Coming soon state (no songs at all) -->
+    <div class="coming-soon reveal" *ngIf="!loading && songs.length === 0">
+      <div class="coming-icon">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <path d="M9 18V5l12-2v13"/>
+          <circle cx="6" cy="18" r="3"/>
+          <circle cx="18" cy="16" r="3"/>
+        </svg>
+      </div>
+      <span class="badge badge-primary coming-badge">Тун удахгүй</span>
+      <h2>Дууны сан бэлтгэгдэж байна</h2>
+      <p>Монгол болон гадаадын дуунуудаас бүрдсэн дууны сан удахгүй нэмэгдэх болно</p>
+    </div>
+  </div>
+</div>
