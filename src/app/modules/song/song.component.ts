@@ -40,7 +40,7 @@ export class SongComponent implements OnInit, OnDestroy {
 
   loadLatestSongs(): void {
     this.loading = true;
-    this.songService.getSongs({ limit: 20 }).subscribe({
+    this.songService.getSongs({ limit: 100 }).subscribe({
       next: (res) => {
         this.songs = res?.data || [];
         this.extractGenres(this.songs);
