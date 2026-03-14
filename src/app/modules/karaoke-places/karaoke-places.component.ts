@@ -1,12 +1,5 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  AfterViewInit,
-  ElementRef,
-  ViewChild,
-} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, OnDestroy, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import * as L from 'leaflet';
 
@@ -86,7 +79,7 @@ export class KaraokePlacesComponent implements OnInit, AfterViewInit, OnDestroy 
           this.userLat = 47.8806789;
           this.userLng = 106.86153;
           this.loadPlaces();
-        }
+        },
       );
     } else {
       this.userLat = 47.8806789;
@@ -98,29 +91,33 @@ export class KaraokePlacesComponent implements OnInit, AfterViewInit, OnDestroy 
   loadPlaces(): void {
     this.loading = true;
     const url = `${environment.songUrl}/api/v1/places?lat=${this.userLat}&lng=${this.userLng}`;
-    this.http.get<any>(url).subscribe({
-      next: (res) => {
-        this.places = (res?.data || res || []);
-        this.filteredPlaces = [...this.places];
-        this.loading = false;
-        this.placesLoaded = true;
-        if (this.mapReady) {
-          this.addMarkersToMap();
-        }
-      },
-      error: () => {
-        this.places = [];
-        this.filteredPlaces = [];
-        this.loading = false;
-      },
-    });
+    let httpParams = new HttpParams();
+    httpParams = httpParams.set('limit', 2000);
+    this.http
+      .get<any>(url, {
+        headers: { 'x-api-key': 'HD9RxmGUaBYEJfByeURczsmTVoaIv3qzZZG8b3ZLKHOmQAhJZWVC' },
+        params: httpParams,
+      })
+      .subscribe({
+        next: (res) => {
+          this.places = res?.data || res || [];
+          this.filteredPlaces = [...this.places];
+          this.loading = false;
+          this.placesLoaded = true;
+          if (this.mapReady) {
+            this.addMarkersToMap();
+          }
+        },
+        error: () => {
+          this.places = [];
+          this.filteredPlaces = [];
+          this.loading = false;
+        },
+      });
   }
 
   initMap(): void {
-    const center: L.LatLngTuple = [
-      this.userLat ?? 47.8806789,
-      this.userLng ?? 106.86153,
-    ];
+    const center: L.LatLngTuple = [this.userLat ?? 47.8806789, this.userLng ?? 106.86153];
     this.map = L.map(this.mapContainer.nativeElement, {
       center,
       zoom: 12,
@@ -147,7 +144,7 @@ export class KaraokePlacesComponent implements OnInit, AfterViewInit, OnDestroy 
             <strong>${place.name}</strong>
             ${place.phoneNumber ? `<br><span>📞 ${place.phoneNumber}</span>` : ''}
           </div>`,
-          { maxWidth: 220 }
+          { maxWidth: 220 },
         );
       this.markers.set(place.id, marker);
     });
@@ -158,9 +155,8 @@ export class KaraokePlacesComponent implements OnInit, AfterViewInit, OnDestroy 
     if (!q) {
       this.filteredPlaces = [...this.places];
     } else {
-      this.filteredPlaces = this.places.filter((p) =>
-        (p.name || '').toLowerCase().includes(q) ||
-        (p.nameTr || '').toLowerCase().includes(q)
+      this.filteredPlaces = this.places.filter(
+        (p) => (p.name || '').toLowerCase().includes(q) || (p.nameTr || '').toLowerCase().includes(q),
       );
     }
   }
@@ -179,9 +175,10 @@ export class KaraokePlacesComponent implements OnInit, AfterViewInit, OnDestroy 
     this.currentSlide = 0;
     this.detailLoading = true;
     document.body.style.overflow = 'hidden';
-
     this.http
-      .get<any>(`${environment.songUrl}/api/v1/places/${place.id}`)
+      .get<any>(`${environment.songUrl}/api/v1/places/${place.id}`, {
+        headers: { 'x-api-key': 'HD9RxmGUaBYEJfByeURczsmTVoaIv3qzZZG8b3ZLKHOmQAhJZWVC' },
+      })
       .subscribe({
         next: (data) => {
           this.selectedPlace = data;
@@ -204,15 +201,12 @@ export class KaraokePlacesComponent implements OnInit, AfterViewInit, OnDestroy 
 
   prevSlide(): void {
     if (!this.selectedPlace?.covers?.length) return;
-    this.currentSlide =
-      (this.currentSlide - 1 + this.selectedPlace.covers.length) %
-      this.selectedPlace.covers.length;
+    this.currentSlide = (this.currentSlide - 1 + this.selectedPlace.covers.length) % this.selectedPlace.covers.length;
   }
 
   nextSlide(): void {
     if (!this.selectedPlace?.covers?.length) return;
-    this.currentSlide =
-      (this.currentSlide + 1) % this.selectedPlace.covers.length;
+    this.currentSlide = (this.currentSlide + 1) % this.selectedPlace.covers.length;
   }
 
   goToSlide(i: number): void {
@@ -227,6 +221,6 @@ export class KaraokePlacesComponent implements OnInit, AfterViewInit, OnDestroy 
   }
 
   get defaultImage(): string {
-    return 'assets/images/karaoke-default.jpg';
+    return 'assets/images/karaoke-default.png';
   }
 }

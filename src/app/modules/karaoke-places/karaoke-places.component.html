@@ -4,7 +4,7 @@
     <div class="container">
       <span class="section-label">Next Galaxy</span>
       <h1 class="page-title">Karaoke <span class="gradient-text">газрууд</span></h1>
-      <p class="page-subtitle">Next Galaxy-ийн тоног төхөөрөмжийг ашигладаг газрууд</p>
+      <!-- <p class="page-subtitle">Next Galaxy-ийн тоног төхөөрөмжийг ашигладаг газрууд</p> -->
     </div>
   </div>
 
@@ -59,7 +59,7 @@
         <div class="kp-card-img-wrap">
           <img
             class="kp-card-img"
-            [src]="place.imageUrl || defaultImage"
+            [src]="place.image_url || defaultImage"
             [alt]="place.name"
             (error)="$any($event.target).src = defaultImage"
           />
