@@ -13,7 +13,7 @@ export interface SongSearchParams {
 
 @Injectable({ providedIn: 'root' })
 export class SongService {
-  private baseUrl = `${environment.url}/api/v1/songs`;
+  private baseUrl = `${environment.songUrl}/api/v1/songs`;
 
   constructor(private http: HttpClient) {}
 
@@ -24,10 +24,15 @@ export class SongService {
     if (params.search) httpParams = httpParams.set('search', params.search);
     if (params.genreId != null) httpParams = httpParams.set('genreId', params.genreId);
     if (params.searchInLyrics != null) httpParams = httpParams.set('searchInLyrics', params.searchInLyrics);
-    return this.http.get<{ data: any[] }>(this.baseUrl, { params: httpParams });
+    return this.http.get<{ data: any[] }>(this.baseUrl, {
+      headers: { 'x-api-key': 'HD9RxmGUaBYEJfByeURczsmTVoaIv3qzZZG8b3ZLKHOmQAhJZWVC' },
+      params: httpParams,
+    });
   }
 
   getSong(id: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${id}`);
+    return this.http.get<any>(`${this.baseUrl}/${id}`, {
+      headers: { 'x-api-key': 'HD9RxmGUaBYEJfByeURczsmTVoaIv3qzZZG8b3ZLKHOmQAhJZWVC' },
+    });
   }
 }
