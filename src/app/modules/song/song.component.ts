@@ -1,74 +1,109 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
+import { SongService } from './song.service';
+
+interface Genre {
+  id: number;
+  name: string;
+}
 
 @Component({
   selector: 'app-song',
   templateUrl: './song.component.html',
   styleUrls: ['./song.component.scss'],
 })
-export class SongComponent implements OnInit {
+export class SongComponent implements OnInit, OnDestroy {
   songs: any[] = [];
-  filtered: any[] = [];
-  searchQuery = '';
   loading = false;
-  categories: string[] = [];
-  activeCategory = 'Бүгд';
 
-  constructor(private http: HttpClient) {}
+  searchQuery = '';
+  searchInLyrics = false;
+  selectedGenreId: number | null = null;
+  genres: Genre[] = [];
+
+  private searchSubject = new Subject<void>();
+  private destroy$ = new Subject<void>();
+
+  constructor(private songService: SongService, private router: Router) {}
 
   ngOnInit(): void {
-    this.loadSongs();
+    this.loadLatestSongs();
+    this.setupSearch();
   }
 
-  loadSongs(): void {
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  loadLatestSongs(): void {
     this.loading = true;
-    const url = `${environment.url}/api/custom/external/songs`;
-    this.http.get<any[]>(url).subscribe({
-      next: (data) => {
-        this.songs = data || [];
-        this.filtered = this.songs;
-        this.extractCategories();
+    this.songService.getSongs({ limit: 20 }).subscribe({
+      next: (res) => {
+        this.songs = res?.data || [];
+        this.extractGenres(this.songs);
         this.loading = false;
       },
       error: () => {
         this.songs = [];
-        this.filtered = [];
         this.loading = false;
       },
     });
   }
 
-  extractCategories(): void {
-    const cats = new Set(this.songs.map((s) => s.category || s.typeName).filter(Boolean));
-    this.categories = ['Бүгд', ...Array.from(cats)];
+  extractGenres(songs: any[]): void {
+    const map = new Map<number, string>();
+    songs.forEach((s) => {
+      if (s.genre_id && s.genre_name) {
+        map.set(s.genre_id, s.genre_name);
+      }
+    });
+    this.genres = Array.from(map.entries()).map(([id, name]) => ({ id, name }));
   }
 
-  onSearch(event: Event): void {
-    this.searchQuery = (event.target as HTMLInputElement).value;
-    this.applyFilters();
+  setupSearch(): void {
+    this.searchSubject
+      .pipe(
+        debounceTime(400),
+        switchMap(() => {
+          this.loading = true;
+          const params: any = { limit: 20 };
+          if (this.searchQuery.trim()) params.search = this.searchQuery.trim();
+          if (this.searchInLyrics) params.searchInLyrics = true;
+          if (this.selectedGenreId != null) params.genreId = this.selectedGenreId;
+          return this.songService.getSongs(params);
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe({
+        next: (res) => {
+          this.songs = res?.data || [];
+          this.loading = false;
+        },
+        error: () => {
+          this.songs = [];
+          this.loading = false;
+        },
+      });
   }
 
-  setCategory(cat: string): void {
-    this.activeCategory = cat;
-    this.applyFilters();
+  onSearchInput(): void {
+    this.searchSubject.next();
   }
 
-  applyFilters(): void {
-    let result = this.songs;
-    if (this.activeCategory !== 'Бүгд') {
-      result = result.filter(
-        (s) => (s.category || s.typeName) === this.activeCategory
-      );
-    }
+  onGenreChange(): void {
+    this.searchSubject.next();
+  }
+
+  onSearchModeChange(): void {
     if (this.searchQuery.trim()) {
-      const q = this.searchQuery.toLowerCase();
-      result = result.filter(
-        (s) =>
-          (s.name || '').toLowerCase().includes(q) ||
-          (s.artist || '').toLowerCase().includes(q)
-      );
+      this.searchSubject.next();
     }
-    this.filtered = result;
+  }
+
+  openDetail(songId: string): void {
+    this.router.navigate(['/song', songId]);
   }
 }
