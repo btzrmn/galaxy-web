@@ -1,6 +1,6 @@
 .site-footer {
-  background: linear-gradient(180deg, #0a0d20 0%, #080B1A 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #1E1040;
+  border-top: none;
 }
 
 .footer-main {
@@ -21,13 +21,15 @@
     height: 40px;
     width: auto;
     object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
   }
 }
 
 .footer-tagline {
   font-size: 0.875rem;
-  color: #64748B;
-  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
   margin-bottom: 24px;
   max-width: 260px;
 }
@@ -44,25 +46,25 @@
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #64748B;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.5);
   transition: all 0.2s;
 
   &:hover {
-    background: rgba(124, 58, 237, 0.2);
-    border-color: rgba(124, 58, 237, 0.4);
-    color: #A78BFA;
+    background: rgba(124, 58, 237, 0.4);
+    border-color: rgba(124, 58, 237, 0.6);
+    color: white;
     transform: translateY(-2px);
   }
 }
 
 .footer-heading {
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #F8FAFC;
+  color: rgba(255, 255, 255, 0.9);
   margin-bottom: 20px;
 }
 
@@ -76,7 +78,7 @@
 
   li a {
     font-size: 0.875rem;
-    color: #64748B;
+    color: rgba(255, 255, 255, 0.45);
     transition: all 0.2s;
     display: block;
     padding: 2px 0;
@@ -100,50 +102,36 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #64748B;
+    color: rgba(255, 255, 255, 0.45);
 
-    svg {
-      flex-shrink: 0;
-      color: #7C3AED;
-    }
+    svg { flex-shrink: 0; color: #A78BFA; }
 
     a {
       font-size: 0.875rem;
-      color: #64748B;
+      color: rgba(255, 255, 255, 0.45);
       transition: color 0.2s;
 
-      &:hover {
-        color: #A78BFA;
-      }
+      &:hover { color: #A78BFA; }
     }
   }
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 20px 0;
 
   p {
     font-size: 0.8rem;
-    color: #374151;
+    color: rgba(255, 255, 255, 0.25);
     text-align: center;
   }
 }
 
 @media (max-width: 1024px) {
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-  }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
 }
 
 @media (max-width: 600px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
-  .footer-main {
-    padding: 48px 0 32px;
-  }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-main { padding: 48px 0 32px; }
 }
